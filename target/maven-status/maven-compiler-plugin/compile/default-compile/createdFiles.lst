@@ -1,0 +1,6 @@
+com\my\controller\FirstPageController.class
+com\my\service\FirstPageService.class
+com\my\model\User.class
+com\my\dao\StudentMapper.class
+com\my\model\Student.class
+com\my\entranceMain.class
