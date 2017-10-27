@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.my.annotation.Fooish;
 import com.my.model.Student;
 import com.my.service.FirstPageService;
 import com.my.service.QRCodeUtil;
 
 @RestController
+@Fooish(tags={"this_is_class"})
 public class FirstPageController {
 
 	@Value(value = "${erweima.location:D:/Workspaces/MyEclipse 2015/entrance/src/main/resources/erweima.png}")
@@ -28,6 +30,7 @@ public class FirstPageController {
 	private FirstPageService firstPageService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@Fooish(tags={"this_is_method"})
 	String home() {
 		return firstPageService.getString();
 	}

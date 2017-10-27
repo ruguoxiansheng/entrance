@@ -12,7 +12,7 @@ public class MyAnnotationTest {
 		 // 设置扫描路径
 //		 acc.scan("myAnnotation");
 //		 acc.refresh();
-		 InjectClass injectClass = acc.getBean(InjectClass.class);
+		 HelloClass injectClass = acc.getBean(HelloClass.class);
 		 injectClass.print();
 
 

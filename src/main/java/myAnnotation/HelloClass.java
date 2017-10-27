@@ -1,7 +1,7 @@
 package myAnnotation;
 
 @MyAnnotation
-public class InjectClass {
+public class HelloClass {
 
 	public void print() {
 		System.out.println("Hello World!");
