@@ -19,16 +19,16 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 @ConfigurationProperties(prefix = "my.db")
 public class MybatisDbConfigure {
 
-	@Value(value = "${my.db.driverClassName}")
+	@Value(value = "${my.db.driverClassName:com.mysql.jdbc.Driver}")
 	private String driverClassName;
 
-	@Value(value = "${my.db.userName}")
+	@Value(value = "${my.db.userName:root}")
 	private String userName;
 
-	@Value(value = "${my.db.url}")
+	@Value(value = "${my.db.url:jdbc:mysql://localhost:3306/students?useUnicode=true&amp;characterEncoding=UTF-8&useSSL=true&amp;zeroDateTimeBehavior=convertToNull}")
 	private String url;
 
-	@Value(value = "${my.db.passWord}")
+	@Value(value = "${my.db.passWord:Awsdrain9@}")
 	private String passWord;
 
 	protected static Log log = LogFactory.getLog(MybatisDbConfigure.class);
