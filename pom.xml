@@ -57,11 +57,11 @@
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
-		<!-- <dependency>
+		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>druid</artifactId>
 		    <version>1.0.29</version>
-		</dependency> -->
+		</dependency>
 		<!-- 自己写配置Configuration -->
 			<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -104,6 +104,8 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        
+         <!--springboot程序测试依赖，创建项目默认添加-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
