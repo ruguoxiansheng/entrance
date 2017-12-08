@@ -55,15 +55,24 @@ public class FirstPageController {
 		return firstPageService.listStudent();
 	}
 
+	// 采用的是自定义的方法
 	@RequestMapping(value = "/list2", method = RequestMethod.GET)
 	List<Student> list2Student(Long id) {
 		return firstPageService.nativeQuery(id);
 	}
 
+	// 分页查询
 	@RequestMapping(value = "/pageRequest", method = RequestMethod.GET)
-	List<Student> pageRequest(Long id) {
+	List<Student> pageRequest() {
 
 		return firstPageService.pageRequest();
+	}
+
+	// 分页与排序查询
+	@RequestMapping(value = "/pageAndSortRequest", method = RequestMethod.GET)
+	List<Student> pageAndSortRequest() {
+
+		return firstPageService.pageAndSortRequest();
 	}
 
 	@RequestMapping(value = "/erweima", method = RequestMethod.GET)

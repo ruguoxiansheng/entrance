@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.my.dao.StudentMapper;
@@ -63,6 +64,16 @@ public class FirstPageService {
 
 	public List<Student> pageRequest() {
 		PageRequest pageRequest = new PageRequest(1, 3);
+		Page<Student> stuPage = studentMapper.findAll(pageRequest);
+		List<Student> stuList = stuPage.getContent();
+		return stuList;
+	}
+
+	public List<Student> pageAndSortRequest() {
+		Sort sort1 = new Sort(Sort.Direction.DESC, "id");
+		Sort sort2 = new Sort(Sort.Direction.ASC, "name");
+		Sort sort = sort1.and(sort2);
+		PageRequest pageRequest = new PageRequest(1, 2, sort);
 		Page<Student> stuPage = studentMapper.findAll(pageRequest);
 		List<Student> stuList = stuPage.getContent();
 		return stuList;
