@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -59,11 +60,11 @@ public class FirstPageService {
 	public List<Student> nativeQuery(Long id) {
 		return studentMapper.findAll(id);
 	}
-	
+
 	public List<Student> pageRequest() {
-//		PageRequest 
-
-		return studentMapper.findAll();
+		PageRequest pageRequest = new PageRequest(1, 3);
+		Page<Student> stuPage = studentMapper.findAll(pageRequest);
+		List<Student> stuList = stuPage.getContent();
+		return stuList;
 	}
-
 }

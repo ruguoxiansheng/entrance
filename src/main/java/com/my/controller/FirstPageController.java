@@ -9,8 +9,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +20,7 @@ import com.my.service.FirstPageService;
 import com.my.service.QRCodeUtil;
 
 @RestController
-@Fooish(tags={"this_is_class"})
+@Fooish(tags = { "this_is_class" })
 public class FirstPageController {
 
 	@Value(value = "${erweima.location:D:/Workspaces/MyEclipse 2015/entrance/src/main/resources/erweima.png}")
@@ -32,7 +30,7 @@ public class FirstPageController {
 	private FirstPageService firstPageService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	@Fooish(tags={"this_is_method"})
+	@Fooish(tags = { "this_is_method" })
 	String home() {
 		return firstPageService.getString();
 	}
@@ -61,11 +59,11 @@ public class FirstPageController {
 	List<Student> list2Student(Long id) {
 		return firstPageService.nativeQuery(id);
 	}
-	
+
 	@RequestMapping(value = "/pageRequest", method = RequestMethod.GET)
 	List<Student> pageRequest(Long id) {
-		firstPageService.pageRequest();
-		return firstPageService.nativeQuery(id);
+
+		return firstPageService.pageRequest();
 	}
 
 	@RequestMapping(value = "/erweima", method = RequestMethod.GET)

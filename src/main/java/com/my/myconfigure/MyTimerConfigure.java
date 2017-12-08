@@ -64,7 +64,7 @@ public class MyTimerConfigure {
 		SimpleTriggerFactoryBean trigerFactoryBean = new SimpleTriggerFactoryBean();
 		trigerFactoryBean.setJobDetail(jobDetailFactoryBean.getObject());
 		trigerFactoryBean.setStartDelay(0);
-		trigerFactoryBean.setRepeatInterval(3000);
+		trigerFactoryBean.setRepeatInterval(30000000);
 		return trigerFactoryBean;
 	}
 
