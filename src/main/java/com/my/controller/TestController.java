@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.my.dao.GoodInfoJPA;
 import com.my.model.GoodInfoEntity;
-import com.my.myinterface.GoodInfoJPA;
 
 @RestController
 public class TestController {
@@ -42,7 +42,7 @@ public class TestController {
      * @return
      */
     @RequestMapping(value = "/detail",method = RequestMethod.GET)
-    public GoodInfoEntity selectOne(Integer goodId)
+    public GoodInfoEntity selectOne(Long goodId)
     {
         return goodInfoJPA.findOne(goodId);
     }

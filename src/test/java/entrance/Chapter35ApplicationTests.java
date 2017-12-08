@@ -17,8 +17,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.my.entranceMain;
+import com.my.dao.GoodInfoJPA;
 import com.my.model.GoodInfoEntity;
-import com.my.myinterface.GoodInfoJPA;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = entranceMain.class)
@@ -137,9 +137,9 @@ public class Chapter35ApplicationTests {
 	public void testDelete()
 	{
 		//根据主键删除
-		goodInfoJPA.delete(3);
+		goodInfoJPA.delete((long) 8);
 
 		//验证数据库是否已经删除
-		Assert.assertNull(goodInfoJPA.findOne(3));
+		Assert.assertNull(goodInfoJPA.findOne((long) 8));
 	}
 }

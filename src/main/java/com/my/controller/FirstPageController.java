@@ -9,6 +9,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,6 +59,12 @@ public class FirstPageController {
 
 	@RequestMapping(value = "/list2", method = RequestMethod.GET)
 	List<Student> list2Student(Long id) {
+		return firstPageService.nativeQuery(id);
+	}
+	
+	@RequestMapping(value = "/pageRequest", method = RequestMethod.GET)
+	List<Student> pageRequest(Long id) {
+		firstPageService.pageRequest();
 		return firstPageService.nativeQuery(id);
 	}
 

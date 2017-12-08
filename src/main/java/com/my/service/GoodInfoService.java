@@ -7,11 +7,12 @@ import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.my.dao.GoodInfoRepository;
 import com.my.model.GoodInfoEntity;
-import com.my.myinterface.GoodInfoRepository;
 import com.my.mytimer.GoodAddTimer;
 import com.my.mytimer.GoodSecKillRemindTimer;
 import com.my.mytimer.GoodStockCheckTimer;
+
 import org.springframework.transaction.annotation.Transactional;
 
 @Service

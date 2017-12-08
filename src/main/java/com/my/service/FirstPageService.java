@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.my.dao.StudentMapper;
@@ -58,4 +59,11 @@ public class FirstPageService {
 	public List<Student> nativeQuery(Long id) {
 		return studentMapper.findAll(id);
 	}
+	
+	public List<Student> pageRequest() {
+//		PageRequest 
+
+		return studentMapper.findAll();
+	}
+
 }
