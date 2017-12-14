@@ -72,6 +72,7 @@ public class FirstPageService {
 	public List<Student> pageAndSortRequest() {
 		Sort sort1 = new Sort(Sort.Direction.DESC, "id");
 		Sort sort2 = new Sort(Sort.Direction.ASC, "name");
+		// 把两个排序的条件取取与
 		Sort sort = sort1.and(sort2);
 		PageRequest pageRequest = new PageRequest(1, 2, sort);
 		Page<Student> stuPage = studentMapper.findAll(pageRequest);
