@@ -1,20 +1,23 @@
 package com.my.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "people")
 //@IdClass(PeopleKey.class)
-public class People extends PeopleKey{
-	
+public class People  {
+
 	@EmbeddedId
 	private PeopleKey id;
+	
 
 	@Column(name = "age")
 	private int age;
 	
 	@Column(name = "address")
 	private String address;
-	 
+
 	public PeopleKey getId() {
 		return id;
 	}
@@ -25,6 +28,10 @@ public class People extends PeopleKey{
 	
 	public int getAge() {
 		return age;
+	}
+
+	public People() {
+		super();
 	}
 
 	public void setAge(int age) {
@@ -45,6 +52,6 @@ public class People extends PeopleKey{
 		return "People [id=" + id + ", age=" + age + ", address=" + address
 				+ "]";
 	}
-	
+
 	
 }
