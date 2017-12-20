@@ -5,12 +5,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 @Entity
 @Table(name = "people")
-//@IdClass(PeopleKey.class)
-public class People  {
+public class People  extends PeopleKey {
 
 	@EmbeddedId
 	private PeopleKey id;
-	
 
 	@Column(name = "age")
 	private int age;

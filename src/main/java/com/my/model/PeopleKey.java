@@ -31,6 +31,6 @@ public class PeopleKey implements Serializable  {
 	@Override
 	public String toString() {
 		return "PeopleKey [name=" + name + ", idcardno=" + idcardno + "]";
-	}	
+	}
 
 }
