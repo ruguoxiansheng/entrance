@@ -2,6 +2,7 @@ package com.my.controller;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class TableRelationController {
 	private TableRelationService tableRelationService;
 	
 	 @RequestMapping(value = "/save")
-	    public Long save(JSONObject record) throws Exception
+	    public Long save(@RequestBody JSONObject record) throws Exception
 	    {
 	        return tableRelationService.save(record);
 	    }

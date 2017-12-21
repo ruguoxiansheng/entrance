@@ -26,8 +26,8 @@ public class TableRelationService {
 		person.setName(record.getString("personName"));
 		
 		Pet pet = new Pet();
-		pet.setPetName("petName");
-		pet.setPetClass("petClass");
+		pet.setPetName(record.getString("petName"));
+		pet.setPetClass(record.getString("petClass"));
 		
 		person.setPet(pet);
 		

@@ -8,10 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 @Embeddable
 public class PeopleKey implements Serializable  {
-	@Id
+	
 	@Column(name = "name")
 	private String name;
-	@Id
 	@Column(name = "idcardno")
 	private String idcardno;
 	
