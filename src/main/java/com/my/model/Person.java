@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name = "person")
@@ -27,16 +28,15 @@ public class Person  implements Serializable{
 	private String name;
 	
 	//cascade:表的级联操作
-	@OneToOne(cascade = CascadeType.ALL) //JPA注释： 一对一 关系
-	// name="数据库表中person对应的列名"，table：这个类映射的表名，referencedColumnName：参考列名,默认的情况下是列表的主键
-	// 要是想更改，用这个属性（这里是不是有唯一性的要求）。
-	// unique=,
+	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL) //JPA注释： 一对一 关系
+	
+	//referencedColumnName：参考列名,默认的情况下是列表的主键
 	//nullable=是否可以为空，
 	//insertable：是否可以插入，
 	//updatable：是否可以更新
 	// columnDefinition=列定义，
 	//foreignKey=外键
-    @JoinColumn(nullable=true,name="pet_name",referencedColumnName="id")
+    @JoinColumn(name="pet_id",referencedColumnName="id",nullable=false)
 	private Pet pet;
 
 	public Long getId() {

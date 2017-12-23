@@ -1,11 +1,20 @@
 package com.my.service;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.engine.spi.SessionFactoryDelegatingImpl;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.classmate.AnnotationConfiguration;
 import com.my.dao.PersonJPA;
 import com.my.dao.PetJPA;
 import com.my.model.Person;
@@ -19,20 +28,31 @@ public class TableRelationService {
 	
 	@Resource
 	private PetJPA petJPA;
+	
+	  private SessionFactory sessionFactory;
 
+	  @Autowired
+	  public void SomeService(EntityManagerFactory factory) {
+	    if(factory.unwrap(SessionFactory.class) == null){
+	      throw new NullPointerException("factory is not a hibernate factory");
+	    }
+	    this.sessionFactory = factory.unwrap(SessionFactory.class);
+	  }
+	
+	 
 	public Long save(JSONObject record) {
 		
 		// 组装person
 		Person person = new Person();
 		person.setName(record.getString("personName"));
-		
-		Pet pet = new Pet();
-		pet.setPetName(record.getString("petName"));
-		pet.setPetClass(record.getString("petClass"));
-		
-		person.setPet(pet);
-		
-//		petJPA.save(pet);
+		JSONObject petObj = record.getJSONObject("pet");
+		if (null != petObj) {
+			Pet pet = new Pet();
+			pet.setPetName(petObj.getString("petName"));
+			pet.setPetClass(petObj.getString("petClass"));
+			
+			person.setPet(pet);
+		}
 		personJPA.save(person);
 		
 		return 4l;
@@ -41,7 +61,6 @@ public class TableRelationService {
 	public JSONObject getPet(JSONObject record) {
 		
 		Person person = personJPA.findOne(record.getLongValue("id"));
-		Pet pet = person.getPet();
 		System.out.println(person.toString());
 		return (JSONObject) JSON.toJSON(person);
 	}
@@ -53,18 +72,26 @@ public class TableRelationService {
 
 	public Long update(JSONObject record) {
 		
-		Person person = new Person();
-		person.setId(record.getLong("id"));
-		person.setName(record.getString("personName"));
+//		 Session session = sessionFactory.getCurrentSession();
+		Session	 session = sessionFactory.openSession();
+         session.beginTransaction();
+         
+         Person personRecord = session.get(Person.class, record.getLongValue("id"));
+         
+         System.out.println("personRecord:"+personRecord.toString());
 		
-		Pet pet = new Pet();
-		pet.setPetName(record.getString("petName"));
-		pet.setPetClass(record.getString("petClass"));
+        personRecord.setName(record.getString("personName"));
 		
-		person.setPet(pet);
-		
-//		petJPA.save(pet);
-		personJPA.save(person);
+        if (personRecord.getPet() != null) {
+        	 // 如果这里的pet为空
+          Pet petRecord = session.get(Pet.class, personRecord.getPet().getId());
+          System.out.print("petRecord:"+petRecord.toString());
+          petRecord.setPetName(record.getString("petName"));
+          petRecord.setPetClass(record.getString("petClass"));
+          
+        }
+        System.out.println("person:"+personRecord.toString());
+		personJPA.save(personRecord);
 		return 4l;
 	}
 
