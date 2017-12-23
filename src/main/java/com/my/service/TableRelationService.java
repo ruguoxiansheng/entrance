@@ -29,15 +29,15 @@ public class TableRelationService {
 	@Resource
 	private PetJPA petJPA;
 	
-	  private SessionFactory sessionFactory;
+  private SessionFactory sessionFactory;
 
-	  @Autowired
-	  public void SomeService(EntityManagerFactory factory) {
-	    if(factory.unwrap(SessionFactory.class) == null){
-	      throw new NullPointerException("factory is not a hibernate factory");
-	    }
-	    this.sessionFactory = factory.unwrap(SessionFactory.class);
-	  }
+  @Autowired
+  public void SomeService(EntityManagerFactory factory) {
+    if(factory.unwrap(SessionFactory.class) == null){
+      throw new NullPointerException("factory is not a hibernate factory");
+    }
+    this.sessionFactory = factory.unwrap(SessionFactory.class);
+  }
 	
 	 
 	public Long save(JSONObject record) {
@@ -73,24 +73,26 @@ public class TableRelationService {
 	public Long update(JSONObject record) {
 		
 //		 Session session = sessionFactory.getCurrentSession();
-		Session	 session = sessionFactory.openSession();
+		 Session	 session = sessionFactory.openSession();
          session.beginTransaction();
          
          Person personRecord = session.get(Person.class, record.getLongValue("id"));
          
-         System.out.println("personRecord:"+personRecord.toString());
-		
         personRecord.setName(record.getString("personName"));
+        
+        JSONObject petObject = record.getJSONObject("pet");
 		
-        if (personRecord.getPet() != null) {
+        if (petObject != null) {
         	 // 如果这里的pet为空
-          Pet petRecord = session.get(Pet.class, personRecord.getPet().getId());
-          System.out.print("petRecord:"+petRecord.toString());
-          petRecord.setPetName(record.getString("petName"));
-          petRecord.setPetClass(record.getString("petClass"));
+        	 Pet petRecord = null;
+	        if (personRecord.getPet() != null) {
+	        	petRecord = session.get(Pet.class, personRecord.getPet().getId());
+	        }
+         
+          petRecord.setPetName(petObject.getString("petName"));
+          petRecord.setPetClass(petObject.getString("petClass"));
           
         }
-        System.out.println("person:"+personRecord.toString());
 		personJPA.save(personRecord);
 		return 4l;
 	}
