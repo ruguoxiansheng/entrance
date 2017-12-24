@@ -1,20 +1,16 @@
 package com.my.service;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.engine.spi.SessionFactoryDelegatingImpl;
-import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.classmate.AnnotationConfiguration;
 import com.my.dao.PersonJPA;
 import com.my.dao.PetJPA;
 import com.my.model.Person;
@@ -69,11 +65,11 @@ public class TableRelationService {
 		personJPA.delete(record.getLongValue("id"));
 		return 4l;
 	}
-
+	  @Transactional
 	public Long update(JSONObject record) {
 		
-//		 Session session = sessionFactory.getCurrentSession();
-		 Session	 session = sessionFactory.openSession();
+		 Session session = sessionFactory.getCurrentSession();
+//		 Session	 session = sessionFactory.openSession();
          session.beginTransaction();
          
          Person personRecord = session.get(Person.class, record.getLongValue("id"));
@@ -81,16 +77,20 @@ public class TableRelationService {
         personRecord.setName(record.getString("personName"));
         
         JSONObject petObject = record.getJSONObject("pet");
+        
+       
 		
         if (petObject != null) {
         	 // 如果这里的pet为空
-        	 Pet petRecord = null;
+        	Pet petRecord = new Pet();
 	        if (personRecord.getPet() != null) {
-	        	petRecord = session.get(Pet.class, personRecord.getPet().getId());
+	        	petRecord   = session.get(Pet.class, personRecord.getPet().getId());
+
 	        }
-         
           petRecord.setPetName(petObject.getString("petName"));
           petRecord.setPetClass(petObject.getString("petClass"));
+          
+          personRecord.setPet(petRecord);
           
         }
 		personJPA.save(personRecord);
