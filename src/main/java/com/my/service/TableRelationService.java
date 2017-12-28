@@ -136,10 +136,10 @@ public class TableRelationService {
 	public JSONObject twoGet(JSONObject record) {
 		Husband husband = husbandJPA.findOne(record.getLongValue("id"));
 		System.out.println(husband.toString());
-//		String hus = JSON.toJSONString(husband,SerializerFeature.DisableCircularReferenceDetect);
-//		return (JSONObject) JSON.toJSON(husband,SerializerFeature.DisableCircularReferenceDetect);
-		return (JSONObject) JSON.toJSON(husband);
-//		return JSON.parseObject(husband.toString());
+//		JSONString hus = JSON.toJSONString(husband.toString());
+		return JSON.parseObject(husband.toString());
+		
+//		return (JSONObject) JSON.toJSON(husband);
 	}
 
 	// 删除

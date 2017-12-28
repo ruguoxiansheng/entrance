@@ -62,9 +62,22 @@ public class Husband implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Husband [hid=" + hid + ", hname=" + hname + ", hidCard="
-				+ hidCard + ", wife=" + wife + "]";
+		return "{\"hid\":\"" + hid + "\",\"hname\":\"" + hname
+				+ "\",\"hidCard\":\"" + hidCard + "\",\"wife\":" + wife
+				+ "} ";
 	}
+
+//	@Override
+//	public String toString() {
+//		return "Husband [hid=" + hid + ", hname=" + hname + ", hidCard="
+//				+ hidCard + ", wife=" + wife + "]";
+//	}
+
+//	@Override
+//	public String toString() {
+//		return "{'hid':" + hid + ",'hname':" + hname + ",'hidCard':"
+//				+ hidCard + ",'wife':" + wife + "}";
+//	}
 
 
 

@@ -16,6 +16,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "wife")
 public class Wife implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8091602122698339709L;
 	@Id
 	// id自动生成
 	@GeneratedValue
@@ -28,7 +32,7 @@ public class Wife implements Serializable{
 	
 	 @OneToOne(mappedBy = "wife",cascade=CascadeType.ALL)
 	 @JsonBackReference
-	 private Husband husband;
+	 private  Husband husband;
 
 	public Long getWid() {
 		return wid;
@@ -62,9 +66,24 @@ public class Wife implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Wife [wid=" + wid + ", wname=" + wname + ", widCard=" + widCard
-				+ "]";
+		return "{\"wid\":\"" + wid + "\",\"wname\":\"" + wname
+				+ "\",\"widCard\":\"" + widCard + "\"} ";
 	}
-	 
+	
+
+
+//	@Override
+//	public String toString() {
+//		return "'{'wid':" + wid + ", 'wname':" + wname + ", 'widCard':" + widCard
+//				+ "}'";
+//	}
+//	
+
+//	@Override
+//	public String toString() {
+//		return "Wife [wid=" + wid + ", wname=" + wname + ", widCard=" + widCard
+//				+ "]";
+//	}
+//	
 	 
 }
